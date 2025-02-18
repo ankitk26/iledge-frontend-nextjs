@@ -1,0 +1,1 @@
+ALTER TABLE "transactions" ADD CONSTRAINT "transactions_upiRefNo_unique" UNIQUE("upi_ref_no");
