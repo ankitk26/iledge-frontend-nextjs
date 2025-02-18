@@ -1,7 +1,5 @@
 "use client";
 
-import { Label, Pie, PieChart } from "recharts";
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import {
   Card,
   CardContent,
@@ -9,7 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/format-currency";
+import { Label, Pie, PieChart } from "recharts";
 
 export function ExpenseBudgetChart({
   monthlyExpenses,
