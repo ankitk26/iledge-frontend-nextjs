@@ -1,4 +1,11 @@
 import Link from "next/link";
+import LoadTransactionsButton from "./load-transactions-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export default function Header() {
   return (
@@ -23,6 +30,16 @@ export default function Header() {
           <Link href="/admin" className="hover:underline hover:text-gray-100">
             Admin
           </Link>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <LoadTransactionsButton />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Load new transactions</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </header>

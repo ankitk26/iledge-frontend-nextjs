@@ -3,9 +3,11 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const appFont = Geist_Mono({
   subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -28,9 +30,11 @@ export default function RootLayout({
       >
         <body
           className={`${appFont.className} antialiased bg-neutral-950 tracking-wider`}
+          suppressHydrationWarning
         >
           <Header />
           <main className="px-24 mt-10">{children}</main>
+          <Toaster />
         </body>
       </ThemeProvider>
     </html>
