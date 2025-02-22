@@ -6,7 +6,7 @@ export function currMonthWeeklyExpenses() {
   return db
     .select({
       week_no: sql<string>`concat('week', row_number() over (partition by date_trunc('month', now()) order by date_trunc('month', now())))`,
-      total_amount: sql<number>`sum(amount)::float`,
+      total_amount: sql<number>`round(sum(amount))::float`,
     })
     .from(transactions)
     .where(

@@ -6,7 +6,7 @@ export function getCurrAndPrevMonthExpenses() {
   return db
     .select({
       month: sql<string>`DATE_TRUNC('month', transaction_date)::date`,
-      total_amount: sql<number>`sum(amount)::float`,
+      total_amount: sql<number>`round(sum(amount))::float`,
     })
     .from(transactions)
     .where(

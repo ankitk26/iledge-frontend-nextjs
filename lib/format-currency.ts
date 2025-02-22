@@ -3,4 +3,5 @@ export const formatCurrency = (number: number) =>
     style: "currency",
     currency: "INR",
     currencyDisplay: "symbol",
+    maximumFractionDigits: 0,
   });
