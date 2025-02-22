@@ -253,5 +253,18 @@ body {
     --color-stone-950: oklch(0.147 0.004 49.25);
     --color-black: #000;
     --color-white: #fff;
+
+
+    --color-brand-50: var(--color-rose-50);
+    --color-brand-100: var(--color-rose-100);
+    --color-brand-200: var(--color-rose-200);
+    --color-brand-300: var(--color-rose-300);
+    --color-brand-400: var(--color-rose-400);
+    --color-brand-500: var(--color-rose-500);
+    --color-brand-600: var(--color-rose-600);
+    --color-brand-700: var(--color-rose-700);
+    --color-brand-800: var(--color-rose-800);
+    --color-brand-900: var(--color-rose-900);
+    --color-brand-950: var(--color-rose-950);
   }
 }

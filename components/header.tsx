@@ -1,11 +1,11 @@
-import Link from "next/link";
-import LoadTransactionsButton from "./load-transactions-button";
+import LoadTransactionsButton from "@/components/load-transactions-button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
+} from "@/components/ui/tooltip";
+import Link from "next/link";
 
 export default function Header() {
   return (
