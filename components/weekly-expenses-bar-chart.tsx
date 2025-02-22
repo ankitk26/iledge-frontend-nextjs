@@ -16,11 +16,11 @@ export default function WeeklyExpensesBarChart({
   const chartConfig = {
     amount: { label: "Amount" },
     ...Object.fromEntries(
-      chartData.map(({ week }) => [
+      chartData.map(({ week, fill }) => [
         week, // Week key is already formatted correctly
         {
           label: week.replace("week", "Week "),
-          color: "var(--color-brand-800)",
+          color: fill,
         },
       ])
     ),

@@ -8,7 +8,7 @@ export async function CurrentMonthWeeklyExpenses() {
   const chartData = weeklyExpenses.map((week) => ({
     week: week.week_no,
     amount: week.total_amount,
-    fill: "var(--color-brand-600)",
+    fill: "var(--color-brand-800)",
   }));
 
   return (
