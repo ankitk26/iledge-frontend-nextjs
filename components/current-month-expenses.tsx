@@ -8,16 +8,23 @@ import {
 } from "@/components/ui/card";
 import { ChartConfig } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/format-currency";
-import { getCurrAndPrevMonthExpenses } from "@/queries/curr-and-prev-month-expenses";
+import { getCurrAndPrevMonthExpenses } from "@/queries/get-curr-and-prev-month-expenses";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
+const budget = 30000;
+
 export default async function CurrentMonthExpenses() {
-  const monthlyTransactions = await getCurrAndPrevMonthExpenses();
+  const currAndPrevMonthExpenses = await getCurrAndPrevMonthExpenses();
 
-  const currentMonthExpenses = monthlyTransactions[1]?.total_amount ?? 0;
-  const previousMonthExpenses = monthlyTransactions[0]?.total_amount ?? 0;
+  const currentMonthExpenses = currAndPrevMonthExpenses[1]?.total_amount ?? 0;
+  const previousMonthExpenses = currAndPrevMonthExpenses[0]?.total_amount ?? 0;
 
-  const budget = 30000;
+  const margin = Math.abs(
+    Math.round(
+      ((currentMonthExpenses - previousMonthExpenses) / currentMonthExpenses) *
+        100
+    )
+  );
 
   const chartConfig = {
     amount: {
@@ -44,15 +51,8 @@ export default async function CurrentMonthExpenses() {
     },
   ];
 
-  const margin = Math.abs(
-    Math.round(
-      ((currentMonthExpenses - previousMonthExpenses) / currentMonthExpenses) *
-        100
-    )
-  );
-
   return (
-    <Card className="w-auto col-span-1 gap-4 flex flex-col">
+    <Card className="md:col-span-1 gap-4 flex flex-col">
       <CardHeader className="text-center">
         <CardTitle>Current month expenses</CardTitle>
       </CardHeader>

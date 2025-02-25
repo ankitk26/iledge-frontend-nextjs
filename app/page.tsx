@@ -3,7 +3,7 @@ import { CurrentMonthWeeklyExpenses } from "@/components/current-month-weekly-ex
 
 export default function HomePage() {
   return (
-    <div className="grid grid-cols-3 flex-1 gap-4">
+    <div className="grid md:grid-cols-3 flex-1 md:gap-4 gap-8">
       <CurrentMonthExpenses />
       <CurrentMonthWeeklyExpenses />
     </div>
