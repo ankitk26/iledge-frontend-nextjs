@@ -6,15 +6,22 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { MenuIcon } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="px-24">
+    <header className="lg:px-24 px-8">
       <div className="flex items-center py-4 justify-between border-b border-b-neutral-800">
         <Link href="/">
           <h1 className="text-2xl font-bold">iLedge</h1>
         </Link>
-        <div className="flex text-sm items-center gap-8">
+        <div className="flex lg:hidden text-sm gap-8">
+          <Button size="icon">
+            <MenuIcon />
+          </Button>
+        </div>
+        <div className="lg:flex text-sm items-center hidden gap-8">
           <Link
             href="/transactions"
             className="hover:underline hover:text-gray-100"
