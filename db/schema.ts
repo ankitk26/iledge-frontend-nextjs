@@ -8,8 +8,8 @@ import {
 } from "drizzle-orm/pg-core";
 
 const timestamps = {
-  createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp({ withTimezone: true })
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp({ withTimezone: true })
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
@@ -23,9 +23,9 @@ export const categories = pgTable("categories", {
 
 export const receivers = pgTable("receivers", {
   id: serial().primaryKey(),
-  receiverUpiId: text().unique().notNull(),
+  receiver_upi_id: text().unique().notNull(),
   name: text().notNull(),
-  categoryId: integer()
+  category_id: integer()
     .notNull()
     .default(0)
     .references(() => categories.id, { onDelete: "set default" }),
@@ -34,14 +34,14 @@ export const receivers = pgTable("receivers", {
 
 export const transactions = pgTable("transactions", {
   id: serial().primaryKey(),
-  upiRefNo: text().unique().notNull(),
-  senderUpiId: text().notNull(),
-  receiverId: integer()
+  upi_ref_no: text().unique().notNull(),
+  sender_upi_id: text().notNull(),
+  receiver_id: integer()
     .notNull()
     .references(() => receivers.id, { onDelete: "no action" }),
   amount: decimal().notNull(),
-  transactionDate: timestamp(),
-  categoryId: integer()
+  transaction_date: timestamp(),
+  category_id: integer()
     .default(0)
     .notNull()
     .references(() => categories.id, { onDelete: "set default" }),
