@@ -12,7 +12,7 @@ export async function CurrentMonthWeeklyExpenses() {
   }));
 
   return (
-    <Card className="w-auto flex flex-col col-span-2">
+    <Card className="w-auto flex flex-col md:col-span-2">
       <CardHeader className="text-center">
         <CardTitle>Weekly expenses this month</CardTitle>
       </CardHeader>
