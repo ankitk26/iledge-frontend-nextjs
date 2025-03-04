@@ -18,6 +18,8 @@ const timestamps = {
 export const categories = pgTable("categories", {
   id: serial().primaryKey(),
   description: text().notNull().unique(),
+  parent_category: text().notNull().default("Uncategorized"),
+  icon_name: text().notNull().default("circle-help"),
   ...timestamps,
 });
 

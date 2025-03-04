@@ -1,0 +1,1 @@
+ALTER TABLE "categories" ADD COLUMN "parent_category" text DEFAULT 'Uncategorized' NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE "categories" ADD COLUMN "icon_name" text DEFAULT 'circle-help' NOT NULL;

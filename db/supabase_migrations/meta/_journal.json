@@ -71,6 +71,20 @@
       "when": 1740257672712,
       "tag": "0009_fantastic_xavin",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1740525440801,
+      "tag": "0010_green_the_hood",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1740526428164,
+      "tag": "0011_opposite_grandmaster",
+      "breakpoints": true
     }
   ]
 }
