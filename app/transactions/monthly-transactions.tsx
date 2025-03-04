@@ -18,7 +18,7 @@ interface Props {
 export default function MonthlyTransactions({ allTransactions }: Props) {
   const { year, month } = useTransactions();
 
-  const date = new Date(year, month - 1).toLocaleString("en-US", {
+  const date = new Date(year, month).toLocaleString("en-US", {
     month: "long",
     year: "numeric",
   });
@@ -28,13 +28,13 @@ export default function MonthlyTransactions({ allTransactions }: Props) {
       transaction.transaction_date?.toLocaleString("en-US", {
         month: "long",
         year: "numeric",
-      }) == date
+      }) == date,
   );
 
   return (
     <section className="mt-16">
       <h1>{date} transactions</h1>
-      <div className="flex my-4 flex-col items-stretch gap-4">
+      <div className="my-4 flex flex-col items-stretch gap-4">
         {filteredTransactions.map((transaction) => (
           <TransactionItem key={transaction.id} transaction={transaction} />
         ))}
