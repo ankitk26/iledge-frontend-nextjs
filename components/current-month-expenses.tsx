@@ -21,7 +21,7 @@ export default async function CurrentMonthExpenses() {
 
   const margin = Math.abs(
     Math.round(
-      ((currentMonthExpenses - previousMonthExpenses) / currentMonthExpenses) *
+      ((currentMonthExpenses - previousMonthExpenses) / previousMonthExpenses) *
         100
     )
   );

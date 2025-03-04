@@ -17,7 +17,13 @@ export async function CurrentMonthWeeklyExpenses() {
         <CardTitle>Weekly expenses this month</CardTitle>
       </CardHeader>
       <CardContent className="flex-1 px-6 m-0">
-        <WeeklyExpensesBarChart chartData={chartData} />
+        {chartData.length === 0 ? (
+          <p className="text-center text-neutral-500 text-sm">
+            No transactions this month. Please refresh if needed
+          </p>
+        ) : (
+          <WeeklyExpensesBarChart chartData={chartData} />
+        )}
       </CardContent>
     </Card>
   );
