@@ -2,17 +2,10 @@
 
 import TransactionItem from "./transaction-item";
 import { useTransactions } from "./transaction-provider";
+import { Transaction } from "./types/transaction";
 
 interface Props {
-  allTransactions: {
-    id: number;
-    receiver_id: number;
-    receiver_name: string;
-    receiver_upi: string;
-    transaction_date: Date | null;
-    amount: number;
-    category: string;
-  }[];
+  allTransactions: Transaction[];
 }
 
 export default function MonthlyTransactions({ allTransactions }: Props) {

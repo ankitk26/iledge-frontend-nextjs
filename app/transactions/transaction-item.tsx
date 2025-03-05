@@ -1,32 +1,13 @@
 "use client";
 
+import { categoryIcons } from "@/lib/category-icon";
 import { formatCurrency } from "@/lib/format-currency";
 import { cn } from "@/lib/utils";
-import * as LucideIcons from "lucide-react";
 import Link from "next/link";
-
-// Define category icons mapping
-const CATEGORY_ICONS = {
-  food: LucideIcons.Utensils,
-  groceries: LucideIcons.ShoppingCart,
-  transport: LucideIcons.Car,
-  entertainment: LucideIcons.Film,
-  utilities: LucideIcons.Bolt,
-  healthcare: LucideIcons.HeartPulse,
-  shopping: LucideIcons.ShoppingBag,
-  default: LucideIcons.CircleHelp,
-};
+import { Transaction } from "./types/transaction";
 
 interface Props {
-  transaction: {
-    id: number;
-    receiver_id: number;
-    receiver_name: string;
-    receiver_upi: string;
-    transaction_date: Date | null;
-    amount: number;
-    category: string;
-  };
+  transaction: Transaction;
 }
 
 export default function TransactionItem({ transaction }: Props) {
@@ -42,9 +23,8 @@ export default function TransactionItem({ transaction }: Props) {
   });
 
   const CategoryIcon =
-    CATEGORY_ICONS[
-      transaction.category.toLowerCase() as keyof typeof CATEGORY_ICONS
-    ] || CATEGORY_ICONS.default;
+    categoryIcons[transaction.category_icon as keyof typeof categoryIcons] ||
+    categoryIcons.default;
 
   return (
     <div className="group">

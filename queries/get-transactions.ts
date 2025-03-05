@@ -12,13 +12,14 @@ export function getTransactions() {
       transaction_date: transactions.transaction_date,
       amount: sql<number>`transactions.amount::float`,
       category_id: categories.id,
-      icon_name: categories.,
+      category_description: categories.description,
+      category_icon: categories.icon_name,
     })
     .from(transactions)
     .innerJoin(receivers, eq(transactions.receiver_id, receivers.id))
     .innerJoin(
       categories,
-      sql`case when transactions.category_id = 0 then receivers.category_id else transactions.category_id end  = categories.id`
+      sql`case when transactions.category_id = 0 then receivers.category_id else transactions.category_id end  = categories.id`,
     )
     .orderBy(desc(transactions.transaction_date));
 }
