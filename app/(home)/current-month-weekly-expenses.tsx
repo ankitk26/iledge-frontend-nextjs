@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import WeeklyExpensesBarChart from "@/components/weekly-expenses-bar-chart";
+import WeeklyExpensesBarChart from "@/app/(home)/weekly-expenses-bar-chart";
 import { currMonthWeeklyExpenses } from "@/queries/weekly-expenses";
 
 export async function CurrentMonthWeeklyExpenses() {
@@ -12,13 +12,13 @@ export async function CurrentMonthWeeklyExpenses() {
   }));
 
   return (
-    <Card className="w-auto flex flex-col md:col-span-2">
+    <Card className="flex w-auto flex-col md:col-span-2">
       <CardHeader className="text-center">
         <CardTitle>Weekly expenses this month</CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 px-6 m-0">
+      <CardContent className="m-0 flex-1 px-6">
         {chartData.length === 0 ? (
-          <p className="text-center text-neutral-500 text-sm">
+          <p className="text-center text-sm text-neutral-500">
             No transactions this month. Please refresh if needed
           </p>
         ) : (

@@ -11,7 +11,8 @@ export function getTransactions() {
       receiver_upi: receivers.receiver_upi_id,
       transaction_date: transactions.transaction_date,
       amount: sql<number>`transactions.amount::float`,
-      category: categories.description,
+      category_id: categories.id,
+      icon_name: categories.,
     })
     .from(transactions)
     .innerJoin(receivers, eq(transactions.receiver_id, receivers.id))

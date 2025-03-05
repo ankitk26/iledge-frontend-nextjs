@@ -20,7 +20,7 @@ export default function BudgetSpendPieChart({
   return (
     <ChartContainer
       config={chartConfig}
-      className="max-h-[250px] aspect-square mx-auto"
+      className="mx-auto aspect-square max-h-[250px]"
     >
       <PieChart>
         <Pie

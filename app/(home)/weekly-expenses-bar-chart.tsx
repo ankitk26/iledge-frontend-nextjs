@@ -22,14 +22,14 @@ export default function WeeklyExpensesBarChart({
           label: week.replace("week", "Week "),
           color: fill,
         },
-      ])
+      ]),
     ),
   } satisfies ChartConfig;
 
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-square w-full max-h-[320px]"
+      className="aspect-square max-h-[320px] w-full"
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
         <YAxis

@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
-import { ThemeProvider } from "@/app/theme-provider";
+import { ThemeProvider } from "@/app/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 const appFont = Geist_Mono({
@@ -28,11 +28,11 @@ export default function RootLayout({
         disableTransitionOnChange
       >
         <body
-          className={`${appFont.className} antialiased bg-neutral-950 tracking-wider`}
+          className={`${appFont.className} bg-neutral-950 tracking-wider antialiased`}
           suppressHydrationWarning
         >
           <Header />
-          <main className="lg:px-24 px-8 mt-10">{children}</main>
+          <main className="mt-10 px-8 lg:px-24">{children}</main>
           <Toaster />
         </body>
       </ThemeProvider>

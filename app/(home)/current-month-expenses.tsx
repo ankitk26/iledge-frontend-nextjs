@@ -1,4 +1,4 @@
-import BudgetSpendPieChart from "@/components/budget-spend-pie-chart";
+import BudgetSpendPieChart from "@/app/(home)/budget-spend-pie-chart";
 import {
   Card,
   CardContent,
@@ -22,8 +22,8 @@ export default async function CurrentMonthExpenses() {
   const margin = Math.abs(
     Math.round(
       ((currentMonthExpenses - previousMonthExpenses) / previousMonthExpenses) *
-        100
-    )
+        100,
+    ),
   );
 
   const chartConfig = {
@@ -52,7 +52,7 @@ export default async function CurrentMonthExpenses() {
   ];
 
   return (
-    <Card className="md:col-span-1 gap-4 flex flex-col">
+    <Card className="flex flex-col gap-4 md:col-span-1">
       <CardHeader className="text-center">
         <CardTitle>Current month expenses</CardTitle>
       </CardHeader>
@@ -63,7 +63,7 @@ export default async function CurrentMonthExpenses() {
           currentMonthExpenses={currentMonthExpenses}
         />
       </CardContent>
-      <CardFooter className="flex flex-col py-3 gap-2">
+      <CardFooter className="flex flex-col gap-2 py-3">
         <div
           className={`font-bold ${
             currentMonthExpenses >= budget
@@ -74,16 +74,16 @@ export default async function CurrentMonthExpenses() {
           {currentMonthExpenses >= budget
             ? "Budget exceeded!"
             : `${Math.round(
-                (currentMonthExpenses / budget) * 100
+                (currentMonthExpenses / budget) * 100,
               )}% budget used`}
         </div>
-        <div className="text-sm flex items-center gap-2">
+        <div className="flex items-center gap-2 text-sm">
           <span>vs {formatCurrency(previousMonthExpenses)} last month</span>
           <div
-            className={`flex text-sm items-center rounded-full px-2 ${
+            className={`flex items-center rounded-full px-2 text-sm ${
               margin > 0
-                ? "text-emerald-500 bg-emerald-100"
-                : "text-rose-500 bg-rose-100"
+                ? "bg-emerald-100 text-emerald-500"
+                : "bg-rose-100 text-rose-500"
             }`}
           >
             {margin < 0 ? (

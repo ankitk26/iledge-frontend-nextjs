@@ -14,7 +14,7 @@ const TransactionContext = createContext(
     setMonth: Dispatch<SetStateAction<number>>;
     year: number;
     setYear: Dispatch<SetStateAction<number>>;
-  }
+  },
 );
 
 export default function TransactionProvider({

@@ -41,7 +41,7 @@ export default function MonthlyTotalChart({
     // Take the specified months from the end
     const start = Math.max(
       0,
-      memoizedMonthlyTotals.length - windowSize - windowStart
+      memoizedMonthlyTotals.length - windowSize - windowStart,
     );
     const end = Math.min(memoizedMonthlyTotals.length, start + windowSize);
 
@@ -67,8 +67,8 @@ export default function MonthlyTotalChart({
       setWindowStart((prev) =>
         Math.min(
           prev + navigationStep,
-          memoizedMonthlyTotals.length - windowSize
-        )
+          memoizedMonthlyTotals.length - windowSize,
+        ),
       );
     }
   };
@@ -101,7 +101,7 @@ export default function MonthlyTotalChart({
     <div className="flex flex-col items-center">
       <ChartContainer
         config={chartConfig}
-        className="aspect-auto mt-10 h-[250px] w-full"
+        className="mt-10 aspect-auto h-[250px] w-full"
       >
         <BarChart
           accessibilityLayer
@@ -140,7 +140,7 @@ export default function MonthlyTotalChart({
         </BarChart>
       </ChartContainer>
 
-      <div className="flex items-center gap-4 mt-4">
+      <div className="mt-4 flex items-center gap-4">
         <Button
           variant="outline"
           size="icon"
