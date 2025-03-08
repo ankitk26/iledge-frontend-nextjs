@@ -1,12 +1,13 @@
 import Header from "@/components/header";
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-const appFont = Geist_Mono({
+const appFont = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
