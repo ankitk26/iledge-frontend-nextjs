@@ -16,5 +16,5 @@ export default async function getReceivers() {
     })
     .from(receivers)
     .innerJoin(categories, eq(receivers.category_id, categories.id))
-    .orderBy(receivers.name, receivers.created_at);
+    .orderBy(receivers.name, receivers.receiver_upi_id);
 }
