@@ -1,5 +1,6 @@
 "use client";
 
+import { queryClient } from "@/app/providers/query-provider";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,11 +11,13 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { loadTransactions } from "@/server-actions/load-transactions";
+import { useMutation } from "@tanstack/react-query";
 import { RefreshCw } from "lucide-react";
-import { useAction } from "next-safe-action/hooks";
 
 export default function LoadTransactionsButton() {
-  const { executeAsync, isPending } = useAction(loadTransactions);
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: loadTransactions,
+  });
   const { toast } = useToast();
 
   return (
@@ -25,7 +28,13 @@ export default function LoadTransactionsButton() {
           size="icon"
           disabled={isPending}
           onClick={async () => {
-            await executeAsync();
+            await mutateAsync();
+            queryClient.invalidateQueries({
+              queryKey: ["monthly_totals"],
+            });
+            // queryClient.invalidateQueries({
+            //   queryKey: ["monthly_transactions", year, month],
+            // });
             toast({
               title: "New transactions are loaded ✅",
             });

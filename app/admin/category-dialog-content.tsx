@@ -59,33 +59,32 @@ export default function CategoryDialogContent({
             {parentCategory}
           </h3>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {groupedCategories[parentCategory] &&
-              groupedCategories[parentCategory].map((category) => (
-                <div
-                  key={category.id}
-                  className="flex h-full flex-col items-center justify-between rounded-lg border border-transparent p-2 transition-all hover:border-neutral-800 hover:bg-neutral-900/20"
+            {groupedCategories[parentCategory].map((category) => (
+              <div
+                key={category.id}
+                className="flex h-full flex-col items-center justify-between rounded-lg border border-transparent p-2 transition-all hover:border-neutral-800 hover:bg-neutral-900/20"
+              >
+                <Button
+                  size="icon"
+                  variant={
+                    currentCategory === category.id ? "default" : "outline"
+                  }
+                  className="mb-2"
+                  onClick={() => setCurrentCategory(category.id)}
                 >
-                  <Button
-                    size="icon"
-                    variant={
-                      currentCategory === category.id ? "default" : "outline"
-                    }
-                    className="mb-2"
-                    onClick={() => setCurrentCategory(category.id)}
-                  >
-                    <CategoryIcon
-                      icon_name={category.icon_name}
-                      className="h-4 w-4"
-                    />
-                  </Button>
-                  <span
-                    className="w-full truncate text-center text-sm"
-                    title={category.description}
-                  >
-                    {category.description}
-                  </span>
-                </div>
-              ))}
+                  <CategoryIcon
+                    icon_name={category.icon_name}
+                    className="h-4 w-4"
+                  />
+                </Button>
+                <span
+                  className="w-full truncate text-center text-sm"
+                  title={category.description}
+                >
+                  {category.description}
+                </span>
+              </div>
+            ))}
           </div>
           <Separator className="mt-6 bg-neutral-800" />
         </div>

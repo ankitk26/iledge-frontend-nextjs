@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import WeeklyExpensesBarChart from "@/app/(home)/weekly-expenses-bar-chart";
 import { currMonthWeeklyExpenses } from "@/queries/weekly-expenses";
 
-export async function CurrentMonthWeeklyExpenses() {
+export default async function CurrentMonthWeeklyExpenses() {
   const weeklyExpenses = await currMonthWeeklyExpenses();
 
   const chartData = weeklyExpenses.map((week) => ({

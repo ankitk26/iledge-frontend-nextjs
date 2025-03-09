@@ -1,21 +1,21 @@
 "use client";
 
+import ErrorMessage from "@/components/error-message";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getTransactionsByMonth } from "@/queries/get-transactions-by-month";
 import { useQuery } from "@tanstack/react-query";
 import TransactionItem from "./transaction-item";
 import { useTransactions } from "./transaction-provider";
-import { Skeleton } from "@/components/ui/skeleton";
-import ErrorMessage from "@/components/error-message";
 
 export default function MonthlyTransactions() {
   const { year, month } = useTransactions();
 
   const {
-    data: allTransactions,
+    data: monthlyTransactionsList,
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["transactions_list", year, month],
+    queryKey: ["monthly_transactions", year, month],
     queryFn: () => getTransactionsByMonth(month, year),
   });
 
@@ -45,8 +45,8 @@ export default function MonthlyTransactions() {
     <section className="mt-16">
       <h1>{date} transactions</h1>
       <div className="my-4 flex flex-col items-stretch gap-4">
-        {allTransactions &&
-          allTransactions.map((transaction) => (
+        {monthlyTransactionsList &&
+          monthlyTransactionsList.map((transaction) => (
             <TransactionItem key={transaction.id} transaction={transaction} />
           ))}
       </div>

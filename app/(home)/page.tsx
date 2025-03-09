@@ -1,5 +1,5 @@
 import CurrentMonthExpenses from "@/app/(home)/current-month-expenses";
-import { CurrentMonthWeeklyExpenses } from "@/app/(home)/current-month-weekly-expenses";
+import CurrentMonthWeeklyExpenses from "./current-month-weekly-expenses";
 
 export default function HomePage() {
   return (
