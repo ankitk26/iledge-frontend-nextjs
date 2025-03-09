@@ -3,12 +3,13 @@
 import ErrorMessage from "@/components/error-message";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getTransactionsByMonth } from "@/queries/get-transactions-by-month";
+import { useTransactionStore } from "@/stores/transaction-store";
 import { useQuery } from "@tanstack/react-query";
 import TransactionItem from "./transaction-item";
-import { useTransactions } from "./transaction-provider";
 
 export default function MonthlyTransactions() {
-  const { year, month } = useTransactions();
+  const year = useTransactionStore((store) => store.year);
+  const month = useTransactionStore((store) => store.month);
 
   const {
     data: monthlyTransactionsList,

@@ -6,6 +6,7 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatCurrency } from "@/lib/format-currency";
 import { getMonthlyTotals } from "@/queries/monthly-totals";
+import { updateMonth, updateYear } from "@/stores/transaction-store";
 import { useQuery } from "@tanstack/react-query";
 import {
   ChevronLeft,
@@ -15,14 +16,12 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-import { useTransactions } from "./transaction-provider";
 
 export default function MonthlyTotalChart() {
   const { data: monthlyTotals, isPending } = useQuery({
     queryKey: ["monthly_totals"],
     queryFn: getMonthlyTotals,
   });
-  const { setMonth, setYear } = useTransactions();
   const [windowStart, setWindowStart] = useState(0);
 
   if (isPending) {
@@ -111,8 +110,8 @@ export default function MonthlyTotalChart() {
             radius={5}
             className="cursor-pointer fill-brand-500 hover:fill-brand-700"
             onClick={(data) => {
-              setMonth(data.payload.month_value);
-              setYear(data.payload.year_value);
+              updateMonth(data.payload.month_value);
+              updateYear(data.payload.year_value);
             }}
           >
             <LabelList

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { loadTransactions } from "@/server-actions/load-transactions";
+import { useTransactionStore } from "@/stores/transaction-store";
 import { useMutation } from "@tanstack/react-query";
 import { RefreshCw } from "lucide-react";
 
@@ -18,6 +19,8 @@ export default function LoadTransactionsButton() {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: loadTransactions,
   });
+  const year = useTransactionStore((store) => store.year);
+  const month = useTransactionStore((store) => store.month);
   const { toast } = useToast();
 
   return (
@@ -32,9 +35,9 @@ export default function LoadTransactionsButton() {
             queryClient.invalidateQueries({
               queryKey: ["monthly_totals"],
             });
-            // queryClient.invalidateQueries({
-            //   queryKey: ["monthly_transactions", year, month],
-            // });
+            queryClient.invalidateQueries({
+              queryKey: ["monthly_transactions", year, month],
+            });
             toast({
               title: "New transactions are loaded ✅",
             });
