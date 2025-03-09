@@ -22,7 +22,7 @@ export default function TransactionProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
 
   return (

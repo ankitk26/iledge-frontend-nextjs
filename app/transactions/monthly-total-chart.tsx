@@ -1,55 +1,47 @@
 "use client";
 
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-import { useTransactions } from "./transaction-provider";
-import { formatCurrency } from "@/lib/format-currency";
+import ErrorMessage from "@/components/error-message";
 import { Button } from "@/components/ui/button";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { Skeleton } from "@/components/ui/skeleton";
+import { formatCurrency } from "@/lib/format-currency";
+import { getMonthlyTotals } from "@/queries/monthly-totals";
+import { useQuery } from "@tanstack/react-query";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState } from "react";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import { useTransactions } from "./transaction-provider";
 
-export default function MonthlyTotalChart({
-  monthlyTotals,
-}: {
-  monthlyTotals: {
-    year_value: string;
-    month_value: string;
-    month_year: number;
-    total_amount: number;
-  }[];
-}) {
+export default function MonthlyTotalChart() {
+  const { data: monthlyTotals, isPending } = useQuery({
+    queryKey: ["monthly_totals"],
+    queryFn: getMonthlyTotals,
+  });
   const { setMonth, setYear } = useTransactions();
   const [windowStart, setWindowStart] = useState(0);
 
-  const windowSize = 12; // 12 months displayed
-  const navigationStep = 6; // Move 6 months at a time
+  if (isPending) {
+    return <Skeleton className="mt-8 h-60 w-full" />;
+  }
 
-  const memoizedMonthlyTotals = useMemo(() => monthlyTotals, [monthlyTotals]);
+  if (!monthlyTotals) {
+    return <ErrorMessage />;
+  }
+
+  // 12 months displayed
+  const windowSize = 12;
+  // Move 6 months at a time
+  const navigationStep = 6;
 
   // Slice the data to show the current window from the end
-  const windowedData = useMemo(() => {
-    // Take the specified months from the end
-    const start = Math.max(
-      0,
-      memoizedMonthlyTotals.length - windowSize - windowStart,
-    );
-    const end = Math.min(memoizedMonthlyTotals.length, start + windowSize);
-
-    return memoizedMonthlyTotals.slice(start, end).map((month) => ({
-      fill: "var(--color-brand-500)",
-      ...month,
-    }));
-  }, [memoizedMonthlyTotals, windowStart]);
+  const start = Math.max(0, monthlyTotals.length - windowSize - windowStart);
+  const end = Math.min(monthlyTotals.length, start + windowSize);
+  const windowedData = monthlyTotals.slice(start, end);
 
   const chartConfig = {
     total_amount: {
@@ -57,18 +49,14 @@ export default function MonthlyTotalChart({
     },
     month_year: {
       label: "Month",
-      color: "var(--color-red-500)",
     },
   } satisfies ChartConfig;
 
   const handlePrevious = () => {
     // Only allow going back if there are more months before the current window
-    if (memoizedMonthlyTotals.length > windowSize + windowStart) {
+    if (monthlyTotals.length > windowSize + windowStart) {
       setWindowStart((prev) =>
-        Math.min(
-          prev + navigationStep,
-          memoizedMonthlyTotals.length - windowSize,
-        ),
+        Math.min(prev + navigationStep, monthlyTotals.length - windowSize),
       );
     }
   };
@@ -87,15 +75,14 @@ export default function MonthlyTotalChart({
 
   const handleMostOld = () => {
     // Jump to the oldest months
-    setWindowStart(Math.max(0, memoizedMonthlyTotals.length - windowSize));
+    setWindowStart(Math.max(0, monthlyTotals.length - windowSize));
   };
 
   // Determine if navigation buttons should be disabled
-  const isPreviousDisabled =
-    memoizedMonthlyTotals.length <= windowSize + windowStart;
+  const isPreviousDisabled = monthlyTotals.length <= windowSize + windowStart;
   const isNextDisabled = windowStart === 0;
   const isMostRecentDisabled = windowStart === 0;
-  const isMostOldDisabled = memoizedMonthlyTotals.length <= windowSize;
+  const isMostOldDisabled = monthlyTotals.length <= windowSize;
 
   return (
     <div className="flex flex-col items-center">
@@ -119,13 +106,12 @@ export default function MonthlyTotalChart({
             tickMargin={8}
             minTickGap={32}
           />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <Bar
             dataKey="total_amount"
             radius={5}
+            className="cursor-pointer fill-brand-500 hover:fill-brand-700"
             onClick={(data) => {
-              // Subtract one since typescript date months start from zero
-              setMonth(data.payload.month_value - 1);
+              setMonth(data.payload.month_value);
               setYear(data.payload.year_value);
             }}
           >

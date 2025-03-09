@@ -5,6 +5,7 @@ import { formatCurrency } from "@/lib/format-currency";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Transaction } from "./types/transaction";
+import { formatDate } from "@/lib/format-iso-string";
 
 interface Props {
   transaction: Transaction;
@@ -12,15 +13,8 @@ interface Props {
 
 export default function TransactionItem({ transaction }: Props) {
   const isReceived = transaction.amount < 0;
-  const amountColor = isReceived ? "text-emerald-400" : "text-rose-400";
 
-  const formattedDate = new Date(
-    transaction.transaction_date!,
-  ).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const formattedDate = formatDate(transaction.transaction_date!);
 
   const CategoryIcon =
     categoryIcons[transaction.category_icon as keyof typeof categoryIcons] ||
@@ -57,7 +51,12 @@ export default function TransactionItem({ transaction }: Props) {
           </div>
 
           {/* Amount */}
-          <span className={cn("text-sm font-medium", amountColor)}>
+          <span
+            className={cn(
+              "text-sm font-medium",
+              isReceived ? "text-emerald-400" : "text-rose-400",
+            )}
+          >
             {formatCurrency(Math.abs(transaction.amount))}
           </span>
         </div>

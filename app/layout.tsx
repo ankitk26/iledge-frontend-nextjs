@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import QueryProvider from "./providers/query-provider";
 
 const appFont = Inter({
   subsets: ["latin"],
@@ -22,21 +23,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableColorScheme
-        disableTransitionOnChange
-      >
-        <body
-          className={`${appFont.className} bg-neutral-950 tracking-wider antialiased`}
-          suppressHydrationWarning
+      <QueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableColorScheme
+          disableTransitionOnChange
         >
-          <Header />
-          <main className="mt-10 px-8 lg:px-24">{children}</main>
-          <Toaster />
-        </body>
-      </ThemeProvider>
+          <body
+            className={`${appFont.className} bg-neutral-950 tracking-wider antialiased`}
+            suppressHydrationWarning
+          >
+            <Header />
+            <main className="mt-10 px-8 lg:px-24">{children}</main>
+            <Toaster />
+          </body>
+        </ThemeProvider>
+      </QueryProvider>
     </html>
   );
 }

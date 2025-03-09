@@ -1,8 +1,10 @@
+"use server";
+
 import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql } from "drizzle-orm";
 
-export function getMonthlyTotals() {
+export async function getMonthlyTotals() {
   return db
     .select({
       year_value: sql<string>`EXTRACT(YEAR FROM transaction_date)::int`,
@@ -12,9 +14,9 @@ export function getMonthlyTotals() {
     })
     .from(transactions)
     .groupBy(
-      sql`EXTRACT(YEAR FROM transaction_date), EXTRACT(MONTH FROM transaction_date), TO_CHAR(transaction_date, 'Mon YYYY')`
+      sql`EXTRACT(YEAR FROM transaction_date), EXTRACT(MONTH FROM transaction_date), TO_CHAR(transaction_date, 'Mon YYYY')`,
     )
     .orderBy(
-      sql`EXTRACT(YEAR FROM transaction_date), EXTRACT(MONTH FROM transaction_date)`
+      sql`EXTRACT(YEAR FROM transaction_date), EXTRACT(MONTH FROM transaction_date)`,
     );
 }

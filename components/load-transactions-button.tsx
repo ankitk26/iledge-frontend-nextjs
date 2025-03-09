@@ -40,7 +40,7 @@ export default function LoadTransactionsButton() {
             Load new transactions
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-2 items-center mt-4">
+        <div className="mt-4 flex flex-col items-center gap-2">
           <RefreshCw className="h-6 w-6 animate-spin" />
           <span className="text-xs">Load in progress...</span>
         </div>
