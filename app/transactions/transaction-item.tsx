@@ -5,7 +5,7 @@ import { formatCurrency } from "@/lib/format-currency";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Transaction } from "./types/transaction";
-import { formatDate } from "@/lib/format-iso-string";
+import { formatDate } from "@/lib/format-date";
 
 interface Props {
   transaction: Transaction;
