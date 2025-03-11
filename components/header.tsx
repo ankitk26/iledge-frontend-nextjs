@@ -30,7 +30,6 @@ export default function Header() {
           <h1 className="text-2xl font-bold">iLedge</h1>
         </Link>
 
-        {/* Mobile Menu Button - Only show if logged in */}
         {isLoggedIn && (
           <div className="flex items-center gap-4 lg:hidden">
             <TooltipProvider>
@@ -50,14 +49,13 @@ export default function Header() {
           </div>
         )}
 
-        {/* Desktop Navigation - Only show if logged in */}
         {isLoggedIn && (
           <nav className="hidden items-center gap-8 text-sm lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors hover:text-gray-100 hover:underline"
+                className="transition-colors hover:text-neutral-100 hover:underline"
               >
                 {link.label}
               </Link>
