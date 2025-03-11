@@ -1,5 +1,6 @@
 "use client";
 
+import { loadTransactions } from "@/actions/load-transactions";
 import { queryClient } from "@/app/providers/query-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { loadTransactions } from "@/server-actions/load-transactions";
 import { useTransactionStore } from "@/stores/transaction-store";
 import { useMutation } from "@tanstack/react-query";
 import { RefreshCw } from "lucide-react";
