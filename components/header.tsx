@@ -1,5 +1,6 @@
 "use client";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -14,7 +15,7 @@ import { Button } from "./ui/button";
 import UserProfile from "./user-profile";
 
 export default function Header() {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const isLoggedIn = !!session;
 
   const navLinks = [
@@ -30,48 +31,69 @@ export default function Header() {
           <h1 className="text-2xl font-bold">iLedge</h1>
         </Link>
 
-        {isLoggedIn && (
-          <div className="flex items-center gap-4 lg:hidden">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <LoadTransactionsButton />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Load new transactions</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+        {isPending ? (
+          <>
+            {/* Mobile loading skeleton */}
+            <div className="flex items-center gap-4 lg:hidden">
+              <Skeleton className="h-8 w-8 rounded-md" />
+              <Skeleton className="h-8 w-8 rounded-md" />
+            </div>
 
-            <Button size="icon" aria-label="Menu">
-              <Menu />
-            </Button>
-          </div>
-        )}
+            {/* Desktop loading skeleton */}
+            <div className="hidden items-center gap-8 lg:flex">
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-8 w-8 rounded-md" />
+              <Skeleton className="h-8 w-8 rounded-full" />
+            </div>
+          </>
+        ) : (
+          isLoggedIn && (
+            <>
+              {/* Mobile navigation */}
+              <div className="flex items-center gap-4 lg:hidden">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <LoadTransactionsButton />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Load new transactions</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
 
-        {isLoggedIn && (
-          <nav className="hidden items-center gap-8 text-sm lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-neutral-100 hover:underline"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <LoadTransactionsButton />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Load new transactions</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <UserProfile />
-          </nav>
+                <Button size="icon" aria-label="Menu">
+                  <Menu />
+                </Button>
+              </div>
+
+              {/* Desktop navigation */}
+              <nav className="hidden items-center gap-8 text-sm lg:flex">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="transition-colors hover:text-neutral-100 hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <LoadTransactionsButton />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Load new transactions</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <UserProfile />
+              </nav>
+            </>
+          )
         )}
       </div>
     </header>
