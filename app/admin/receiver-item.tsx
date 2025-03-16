@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import CategoryDialog from "./category-dialog";
+import Link from "next/link";
 
 interface Props {
   receiver: {
@@ -25,7 +26,12 @@ export default function ReceiverItem({ receiver }: Props) {
           <AvatarFallback>{firstLetter}</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <h2 className="font-medium">{receiver.name}</h2>
+          <Link
+            href={`/payees/${receiver.receiver_id}`}
+            className="hover:underline"
+          >
+            <h2 className="font-medium">{receiver.name}</h2>
+          </Link>
           <p className="text-sm text-neutral-500">{receiver.receiver_upi_id}</p>
         </div>
       </div>
