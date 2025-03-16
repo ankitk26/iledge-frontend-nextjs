@@ -10,7 +10,7 @@ export function getCurrAndPrevMonthExpenses() {
     })
     .from(transactions)
     .where(
-      sql`DATE_TRUNC('month', transaction_date) in (DATE_TRUNC('month', NOW()), DATE_TRUNC('month', NOW() - INTERVAL '1 ,month'))`
+      sql`DATE_TRUNC('month', transaction_date) in (DATE_TRUNC('month', NOW()), DATE_TRUNC('month', NOW() - INTERVAL '1 ,month'))`,
     )
     .groupBy(sql`DATE_TRUNC('month', transaction_date)`)
     .orderBy(sql`DATE_TRUNC('month', transaction_date)`);
