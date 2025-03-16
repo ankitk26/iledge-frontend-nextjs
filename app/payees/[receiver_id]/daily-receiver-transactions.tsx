@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 
-export default function DailyTransactions() {
+export default function DailyReceiverTransactions() {
   // get receiver_id from URL parameter
   const { receiver_id } = useParams() as {
     receiver_id: string;

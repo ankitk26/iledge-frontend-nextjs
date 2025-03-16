@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getReceiverById } from "@/queries/get-receiver-by-id";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import DailyTransactions from "./daily-transactions";
-import MonthlyReceiverTransactions from "./monthly-receiver-expenses";
+import DailyReceiverTransactions from "./daily-receiver-transactions";
+import MonthlyReceiverTransactions from "./monthly-receiver-transactions";
 
 export default function PayeePage() {
   const { receiver_id } = useParams() as {
@@ -48,7 +48,7 @@ export default function PayeePage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <DailyTransactions />
+          <DailyReceiverTransactions />
         </CardContent>
       </Card>
 
