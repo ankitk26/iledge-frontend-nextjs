@@ -17,12 +17,13 @@ export default function MonthlyReceiverTransactions() {
   };
 
   const paginationInstanceId = `receivers-monthly-${receiver_id}`;
+  const paginationConfig = {
+    windowSize: 6,
+    navigationStep: 6,
+  };
   const { getWindowedData, showPagination } = usePaginationControls(
     paginationInstanceId,
-    {
-      windowSize: 6,
-      navigationStep: 6,
-    },
+    paginationConfig,
   );
 
   const {
@@ -95,6 +96,7 @@ export default function MonthlyReceiverTransactions() {
         <ChartPagination
           key={paginationInstanceId}
           paginationInstanceId={paginationInstanceId}
+          config={paginationConfig}
         />
       )}
       {/* Need pagination here */}
