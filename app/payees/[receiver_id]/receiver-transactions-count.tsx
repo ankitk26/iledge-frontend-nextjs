@@ -42,8 +42,6 @@ export default function ReceiverTransactionsCount() {
     return <ErrorMessage />;
   }
 
-  console.log(monthlyCounts);
-
   const windowedData = getWindowedData(monthlyCounts);
 
   return (

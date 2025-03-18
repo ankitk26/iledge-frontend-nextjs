@@ -22,8 +22,6 @@ export async function getTransactionsCountByReceiver(receiver_id: number) {
       .where(eq(transactions.receiver_id, receiver_id)),
   );
 
-  console.log(monthly_transactions);
-
   return db
     .with(monthly_transactions)
     .select({
