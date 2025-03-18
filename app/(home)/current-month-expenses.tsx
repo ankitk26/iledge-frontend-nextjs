@@ -9,16 +9,16 @@ import {
 import { ChartConfig } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/format-currency";
 import { cn } from "@/lib/utils";
-import { getCurrAndPrevMonthExpenses } from "@/queries/get-curr-and-prev-month-expenses";
+import { getExpensesComparison } from "@/queries/get-expenses-comparison";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 const BUDGET = 30000;
 
 export default async function CurrentMonthExpenses() {
-  const currAndPrevMonthExpenses = await getCurrAndPrevMonthExpenses();
+  const expensesComparison = await getExpensesComparison();
 
-  const currMonthExpenses = currAndPrevMonthExpenses[1]?.total_amount ?? 0;
-  const previousMonthExpenses = currAndPrevMonthExpenses[0]?.total_amount ?? 0;
+  const currMonthExpenses = expensesComparison[1]?.total_amount ?? 0;
+  const previousMonthExpenses = expensesComparison[0]?.total_amount ?? 0;
 
   const margin = Math.abs(
     Math.round(

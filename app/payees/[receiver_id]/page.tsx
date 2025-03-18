@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getReceiverById } from "@/queries/get-receiver-by-id";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import CompareMonthlyTransactions from "./compare-monthly-transactions";
 import DailyReceiverTransactions from "./daily-receiver-transactions";
 import MonthlyReceiverTransactions from "./monthly-receiver-transactions";
 
@@ -64,13 +65,13 @@ export default function PayeePage() {
           </CardContent>
         </Card>
 
-        <Card className="col-span-1">
+        <Card className="col-span-1 flex flex-col justify-center">
           <CardHeader>
             <CardTitle className="text-center text-xl">
-              Compare previous month
+              Comparison with previous month
             </CardTitle>
           </CardHeader>
-          <CardContent>{/* <CompareMonthlyTransactions /> */}</CardContent>
+          <CompareMonthlyTransactions />
         </Card>
       </div>
 

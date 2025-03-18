@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql } from "drizzle-orm";
 
-export function getCurrAndPrevMonthExpenses() {
+export function getExpensesComparison() {
   return db
     .select({
       month: sql<string>`DATE_TRUNC('month', transaction_date)::date`,
