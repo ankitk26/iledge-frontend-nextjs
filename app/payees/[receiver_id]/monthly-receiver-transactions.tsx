@@ -79,7 +79,7 @@ export default function MonthlyReceiverTransactions() {
           <Bar
             dataKey="total_amount"
             radius={5}
-            className="fill-brand-500 hover:fill-brand-700"
+            className="fill-brand-600 hover:fill-brand-800"
           >
             <LabelList
               dataKey="total_amount"

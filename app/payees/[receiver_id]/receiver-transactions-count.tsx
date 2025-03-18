@@ -78,7 +78,7 @@ export default function ReceiverTransactionsCount() {
           <Bar
             dataKey="transaction_count"
             radius={5}
-            className="fill-brand-500 hover:fill-brand-700"
+            className="fill-brand-600 hover:fill-brand-800"
           >
             <LabelList
               dataKey="transaction_count"

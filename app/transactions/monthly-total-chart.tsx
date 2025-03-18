@@ -69,7 +69,7 @@ export default function MonthlyTotalChart() {
           <Bar
             dataKey="total_amount"
             radius={5}
-            className="cursor-pointer fill-brand-500 hover:fill-brand-700"
+            className="cursor-pointer fill-brand-600 hover:fill-brand-800"
             onClick={(data) => {
               updateMonth(data.payload.month_value);
               updateYear(data.payload.year_value);
