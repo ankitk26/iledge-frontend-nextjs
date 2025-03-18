@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import CompareMonthlyTransactions from "./compare-monthly-transactions";
 import DailyReceiverTransactions from "./daily-receiver-transactions";
 import MonthlyReceiverTransactions from "./monthly-receiver-transactions";
+import ReceiverTransactionsCount from "./receiver-transactions-count";
 
 export default function PayeePage() {
   const { receiver_id } = useParams() as {
@@ -38,11 +39,13 @@ export default function PayeePage() {
   const singleReceiver = receiver[0];
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 flex flex-col gap-8">
       <h1 className="text-2xl font-bold">{singleReceiver.name}</h1>
-      <h2 className="text-neutral-500">{singleReceiver.receiver_upi_id}</h2>
+      <h2 className="-mt-8 text-neutral-500">
+        {singleReceiver.receiver_upi_id}
+      </h2>
 
-      <Card className="mt-8">
+      <Card>
         <CardHeader>
           <CardTitle className="text-center text-xl">
             Daily transactions
@@ -53,7 +56,7 @@ export default function PayeePage() {
         </CardContent>
       </Card>
 
-      <div className="mt-8 grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-3 gap-8">
         <Card className="col-span-2">
           <CardHeader>
             <CardTitle className="text-center text-xl">
@@ -75,7 +78,16 @@ export default function PayeePage() {
         </Card>
       </div>
 
-      {/* <ReceiverExpensesCount /> */}
+      <Card className="col-span-2">
+        <CardHeader>
+          <CardTitle className="text-center text-xl">
+            Transactions per month
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ReceiverTransactionsCount />
+        </CardContent>
+      </Card>
     </div>
   );
 }

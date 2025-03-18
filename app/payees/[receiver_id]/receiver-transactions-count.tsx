@@ -4,19 +4,18 @@ import ChartPagination from "@/components/chart-navigation";
 import ErrorMessage from "@/components/error-message";
 import { ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
-import { formatCurrency } from "@/lib/format-currency";
-import { getMonthlyTransactionsByReceiver } from "@/queries/get-monthly-transactions-by-receiver";
+import { getTransactionsCountByReceiver } from "@/queries/get-transactions-count-by-receiver";
 import { usePaginationControls } from "@/stores/pagination-store";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 
-export default function MonthlyReceiverTransactions() {
+export default function ReceiverTransactionsCount() {
   const { receiver_id } = useParams() as {
     receiver_id: string;
   };
 
-  const paginationInstanceId = `receivers-monthly-${receiver_id}`;
+  const paginationInstanceId = `receivers-transactions-count-${receiver_id}`;
   const paginationConfig = {
     windowSize: 6,
     navigationStep: 6,
@@ -27,29 +26,31 @@ export default function MonthlyReceiverTransactions() {
   );
 
   const {
-    data: monthlyTotals,
+    data: monthlyCounts,
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["receiver_monthly_totals", receiver_id],
-    queryFn: () => getMonthlyTransactionsByReceiver(parseInt(receiver_id)),
+    queryKey: ["receiver_transactions_count", receiver_id],
+    queryFn: () => getTransactionsCountByReceiver(parseInt(receiver_id)),
   });
 
   if (isPending) {
     return <Skeleton className="mt-8 h-60 w-full" />;
   }
 
-  if (!monthlyTotals || isError) {
+  if (!monthlyCounts || isError) {
     return <ErrorMessage />;
   }
 
-  const windowedData = getWindowedData(monthlyTotals);
+  console.log(monthlyCounts);
+
+  const windowedData = getWindowedData(monthlyCounts);
 
   return (
     <div className="flex flex-col items-center">
       <ChartContainer
         config={{
-          total_amount: {
+          transaction_count: {
             label: "Total",
           },
           month_year: {
@@ -77,17 +78,16 @@ export default function MonthlyReceiverTransactions() {
             minTickGap={32}
           />
           <Bar
-            dataKey="total_amount"
+            dataKey="transaction_count"
             radius={5}
             className="fill-brand-500 hover:fill-brand-700"
           >
             <LabelList
-              dataKey="total_amount"
+              dataKey="transaction_count"
               position="top"
               offset={8}
               className="fill-neutral-500"
               fontSize={12}
-              formatter={formatCurrency}
             />
           </Bar>
         </BarChart>
