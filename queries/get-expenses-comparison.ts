@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { transactions } from "@/db/schema";
 import { sql, and, eq } from "drizzle-orm";
 
-export async function getExpensesComparison(receiver_id: number | null) {
+export async function getExpensesComparison(receiver_id: number | null = null) {
   // First, get the current and previous month dates
   const dateResults = await db.execute(
     sql`SELECT DATE_TRUNC('month', NOW())::date as current_month, DATE_TRUNC('month', NOW() - INTERVAL '1 month')::date as previous_month`,
