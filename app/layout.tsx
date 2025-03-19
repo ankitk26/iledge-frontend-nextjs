@@ -1,13 +1,13 @@
 import Header from "@/components/header";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import QueryProvider from "./providers/query-provider";
 
-const appFont = Inter({
+const appFont = Montserrat({
   subsets: ["latin"],
   variable: "--body",
   weight: ["400", "500", "600", "700"],

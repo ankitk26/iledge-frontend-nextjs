@@ -24,6 +24,5 @@ export async function getTransactionsByPayee(receiver_id: number) {
       sql`case when transactions.category_id = 0 then receivers.category_id else transactions.category_id end  = categories.id`,
     )
     .where(sql`receivers.id = ${receiver_id}`)
-    .orderBy(desc(transactions.transaction_date))
-    .limit(1);
+    .orderBy(desc(transactions.transaction_date));
 }

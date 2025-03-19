@@ -9,6 +9,7 @@ import CompareMonthlyTransactions from "./compare-monthly-transactions";
 import DailyReceiverTransactions from "./daily-receiver-transactions";
 import MonthlyReceiverTransactions from "./monthly-receiver-transactions";
 import ReceiverTransactionsCount from "./receiver-transactions-count";
+import ReceiverTransactionsList from "./receiver-transactions-list";
 
 export default function PayeePage() {
   const { receiver_id } = useParams() as {
@@ -88,6 +89,8 @@ export default function PayeePage() {
           <ReceiverTransactionsCount />
         </CardContent>
       </Card>
+
+      <ReceiverTransactionsList />
     </div>
   );
 }
