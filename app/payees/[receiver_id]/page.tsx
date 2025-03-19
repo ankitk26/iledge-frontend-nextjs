@@ -10,6 +10,7 @@ import DailyReceiverTransactions from "./daily-receiver-transactions";
 import MonthlyReceiverTransactions from "./monthly-receiver-transactions";
 import ReceiverTransactionsCount from "./receiver-transactions-count";
 import ReceiverTransactionsList from "./receiver-transactions-list";
+import PayeeOverallTotal from "./payee-overall-total";
 
 export default function PayeePage() {
   const { receiver_id } = useParams() as {
@@ -41,10 +42,13 @@ export default function PayeePage() {
 
   return (
     <div className="mb-8 flex flex-col gap-8">
-      <h1 className="text-2xl font-bold">{singleReceiver.name}</h1>
-      <h2 className="-mt-8 text-neutral-500">
-        {singleReceiver.receiver_upi_id}
-      </h2>
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col">
+          <h1 className="text-2xl font-bold">{singleReceiver.name}</h1>
+          <h2 className="text-neutral-500">{singleReceiver.receiver_upi_id}</h2>
+        </div>
+        <PayeeOverallTotal />
+      </div>
 
       <Card>
         <CardHeader>

@@ -2,7 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePayee } from "@/hooks/use-payee";
 import { formatCurrency } from "@/lib/format-currency";
-import { IndianRupee } from "lucide-react";
 import FilterTabs from "./filter-tabs";
 import MonthYearFilters from "./month-year-filters";
 
@@ -42,7 +41,6 @@ export default function DashboardHeader() {
             variant="outline"
             className="flex items-center gap-2 bg-neutral-900 px-4 py-2"
           >
-            <IndianRupee size={16} />
             Total: {formatCurrency(data?.totalSpent as number)}
           </Badge>
         </div>
