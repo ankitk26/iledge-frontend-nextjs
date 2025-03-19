@@ -30,11 +30,7 @@ type Spender = {
 export default function OtherPayeesTable() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data, isPending } = usePayee({
-    month: null,
-    year: null,
-    searchTerm,
-  });
+  const { data, isPending } = usePayee({ searchTerm });
 
   return (
     <Card className="border-neutral-800 bg-neutral-900">

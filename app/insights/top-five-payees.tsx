@@ -5,10 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { calculatePercentage, usePayee } from "@/hooks/use-payee";
 import { formatCurrency } from "@/lib/format-currency";
 import { TrendingUp } from "lucide-react";
 import TopSpendersSkeleton from "./top-spender-skeleton";
-import { calculatePercentage, usePayee } from "@/hooks/use-payee";
 
 type Spender = {
   name: string;
@@ -16,7 +16,7 @@ type Spender = {
 };
 
 export default function TopFivePayees() {
-  const { data, isPending } = usePayee({ month: null, year: null });
+  const { data, isPending } = usePayee({});
 
   return (
     <Card className="border-neutral-800 bg-neutral-900">
