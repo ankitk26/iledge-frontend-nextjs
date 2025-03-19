@@ -6,7 +6,7 @@ import { ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatCurrency } from "@/lib/format-currency";
 import { cn } from "@/lib/utils";
-import { getExpensesComparisonByReceiver } from "@/queries/get-expenses-comparison-by-receiver";
+import { getExpensesComparison } from "@/queries/get-expenses-comparison";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -19,7 +19,7 @@ export default function CompareMonthlyTransactions() {
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["compare_expenses", receiver_id],
-    queryFn: () => getExpensesComparisonByReceiver(receiver_id),
+    queryFn: () => getExpensesComparison(parseInt(receiver_id)),
   });
 
   if (isPending) {

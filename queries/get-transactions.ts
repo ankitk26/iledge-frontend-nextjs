@@ -1,8 +1,20 @@
+"use server";
+
 import { db } from "@/db";
 import { categories, receivers, transactions } from "@/db/schema";
-import { desc, eq, sql } from "drizzle-orm";
+import { desc, eq, sql, and } from "drizzle-orm";
 
-export function getTransactions() {
+type Props = {
+  receiver_id?: number | null;
+  month?: number | null;
+  year?: number | null;
+};
+
+export async function getTransactions({
+  receiver_id = null,
+  month = null,
+  year = null,
+}: Props = {}) {
   return db
     .select({
       id: transactions.id,
@@ -19,7 +31,18 @@ export function getTransactions() {
     .innerJoin(receivers, eq(transactions.receiver_id, receivers.id))
     .innerJoin(
       categories,
-      sql`case when transactions.category_id = 0 then receivers.category_id else transactions.category_id end  = categories.id`,
+      sql`case when transactions.category_id = 0 then receivers.category_id else transactions.category_id end = categories.id`,
+    )
+    .where(
+      and(
+        receiver_id !== null ? eq(receivers.id, receiver_id) : sql`true`,
+        month !== null
+          ? sql`extract(month from transaction_date) = ${month}`
+          : sql`true`,
+        year !== null
+          ? sql`extract(year from transaction_date) = ${year}`
+          : sql`true`,
+      ),
     )
     .orderBy(desc(transactions.transaction_date));
 }

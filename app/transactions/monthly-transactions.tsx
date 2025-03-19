@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/components/error-message";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getTransactionsByMonth } from "@/queries/get-transactions-by-month";
+import { getTransactions } from "@/queries/get-transactions";
 import { useTransactionStore } from "@/stores/transaction-store";
 import { useQuery } from "@tanstack/react-query";
 import TransactionItem from "./transaction-item";
@@ -17,7 +17,7 @@ export default function MonthlyTransactions() {
     isError,
   } = useQuery({
     queryKey: ["monthly_transactions", year, month],
-    queryFn: () => getTransactionsByMonth(month, year),
+    queryFn: () => getTransactions({ month, year }),
   });
 
   if (isPending) {

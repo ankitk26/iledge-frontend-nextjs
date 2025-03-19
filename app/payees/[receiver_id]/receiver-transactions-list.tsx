@@ -1,7 +1,7 @@
 import TransactionItem from "@/app/transactions/transaction-item";
 import ErrorMessage from "@/components/error-message";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getTransactionsByPayee } from "@/queries/get-transactions-by-payee";
+import { getTransactions } from "@/queries/get-transactions";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
@@ -16,7 +16,7 @@ export default function ReceiverTransactionsList() {
     isError,
   } = useQuery({
     queryKey: ["transactions_by_receiver", receiver_id],
-    queryFn: () => getTransactionsByPayee(parseInt(receiver_id)),
+    queryFn: () => getTransactions({ receiver_id: parseInt(receiver_id) }),
   });
 
   if (isPending) {
