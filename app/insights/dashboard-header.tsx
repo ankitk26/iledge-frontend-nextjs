@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatCurrency } from "@/lib/format-currency";
 import { IndianRupee } from "lucide-react";
-import { usePayee } from "./use-payee";
+import { usePayee } from "@/hooks/use-payee";
 
 export default function DashboardHeader() {
   const { data, isPending } = usePayee({ month: null, year: null });

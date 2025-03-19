@@ -8,7 +8,7 @@ import {
 import { formatCurrency } from "@/lib/format-currency";
 import { TrendingUp } from "lucide-react";
 import TopSpendersSkeleton from "./top-spender-skeleton";
-import { calculatePercentage, usePayee } from "./use-payee";
+import { calculatePercentage, usePayee } from "@/hooks/use-payee";
 
 type Spender = {
   name: string;

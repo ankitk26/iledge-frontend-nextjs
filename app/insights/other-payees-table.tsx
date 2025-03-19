@@ -20,7 +20,7 @@ import { formatCurrency } from "@/lib/format-currency";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import TableSkeleton from "./table-skeleton";
-import { calculatePercentage, usePayee } from "./use-payee";
+import { calculatePercentage, usePayee } from "@/hooks/use-payee";
 
 type Spender = {
   name: string;
