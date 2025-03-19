@@ -10,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { useTransactionStore } from "@/stores/transaction-store";
 import { useMutation } from "@tanstack/react-query";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
@@ -20,16 +19,8 @@ export default function LoadTransactionsButton() {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: loadTransactions,
     onSuccess: () => {
-      const year = useTransactionStore.getState().year;
-      const month = useTransactionStore.getState().month;
-
-      // Invalidate queries after successful load
-      queryClient.invalidateQueries({
-        queryKey: ["monthly_totals"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["monthly_transactions", year, month],
-      });
+      // Invalidate all queries after successful load
+      queryClient.invalidateQueries();
 
       // Close dialog and show toast
       setTimeout(() => {

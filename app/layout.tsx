@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -8,6 +9,13 @@ import QueryProvider from "./providers/query-provider";
 
 const appFont = Inter({
   subsets: ["latin"],
+  variable: "--body",
+  weight: ["400", "500", "600", "700"],
+});
+
+const monoFont = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--mono",
   weight: ["400", "500", "600", "700"],
 });
 
@@ -31,7 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <body
-            className={`${appFont.className} bg-neutral-950 tracking-wider antialiased`}
+            className={`${appFont.variable} ${monoFont.variable} bg-neutral-950 tracking-wider antialiased`}
             suppressHydrationWarning
           >
             <Header />
