@@ -55,9 +55,9 @@ export default function MonthYearFilters() {
   };
 
   return (
-    <div className="flex items-center justify-end gap-4">
+    <div className="mt-6 flex flex-col space-y-2 sm:mt-1 sm:flex-row sm:items-center sm:justify-end sm:gap-4 sm:space-y-0">
       <Select value={year?.toString()} onValueChange={handleYearChange}>
-        <SelectTrigger className="w-48">
+        <SelectTrigger className="w-full sm:w-48">
           <SelectValue placeholder="Choose year" />
         </SelectTrigger>
         <SelectContent>
@@ -73,7 +73,7 @@ export default function MonthYearFilters() {
         value={month?.toString() || "1"}
         onValueChange={(val) => updateInsightsFilter({ month: parseInt(val) })}
       >
-        <SelectTrigger className="w-48">
+        <SelectTrigger className="w-full sm:w-48">
           <SelectValue placeholder="Choose month" />
         </SelectTrigger>
         <SelectContent>

@@ -33,7 +33,7 @@ export default function OtherPayeesTable() {
   const { data, isPending } = usePayee({ searchTerm });
 
   return (
-    <Card className="border-neutral-800 bg-neutral-900">
+    <Card className="mb-8 border-neutral-800 bg-neutral-900">
       <CardHeader>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
