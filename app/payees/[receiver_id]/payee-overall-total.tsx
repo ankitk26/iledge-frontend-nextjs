@@ -28,7 +28,7 @@ export default function PayeeOverallTotal() {
   return (
     <Badge
       variant="outline"
-      className="flex items-center gap-2 bg-neutral-900 px-4 py-2"
+      className="mt-8 w-fit bg-neutral-900 px-4 py-2 lg:mt-0"
     >
       Total: {formatCurrency(totalAmount ?? 0)}
     </Badge>

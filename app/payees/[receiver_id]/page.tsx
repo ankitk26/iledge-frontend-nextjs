@@ -42,10 +42,14 @@ export default function PayeePage() {
 
   return (
     <div className="mb-8 flex flex-col gap-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col">
-          <h1 className="text-2xl font-bold">{singleReceiver.name}</h1>
-          <h2 className="text-neutral-500">{singleReceiver.receiver_upi_id}</h2>
+          <h1 className="text-lg font-bold lg:text-2xl">
+            {singleReceiver.name}
+          </h1>
+          <h2 className="text-sm text-neutral-500 lg:text-base">
+            {singleReceiver.receiver_upi_id}
+          </h2>
         </div>
         <PayeeOverallTotal />
       </div>
@@ -61,8 +65,8 @@ export default function PayeePage() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-3 gap-8">
-        <Card className="col-span-2">
+      <div className="grid gap-8 lg:grid-cols-3">
+        <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="text-center text-xl">
               Monthly transactions
@@ -73,7 +77,7 @@ export default function PayeePage() {
           </CardContent>
         </Card>
 
-        <Card className="col-span-1 flex flex-col justify-center">
+        <Card className="flex flex-col justify-center lg:col-span-1">
           <CardHeader>
             <CardTitle className="text-center text-xl">
               Comparison with previous month

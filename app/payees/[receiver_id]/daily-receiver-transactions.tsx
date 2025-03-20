@@ -4,6 +4,7 @@ import ChartPagination from "@/components/chart-navigation";
 import ErrorMessage from "@/components/error-message";
 import { ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useWindowSize } from "@/hooks/use-window-size";
 import { formatCurrency } from "@/lib/format-currency";
 import { getDailyTransactionsByReceiver } from "@/queries/get-daily-transactions-by-receiver";
 import { usePaginationControls } from "@/stores/pagination-store";
@@ -17,9 +18,16 @@ export default function DailyReceiverTransactions() {
     receiver_id: string;
   };
 
+  const isDesktopSize = useWindowSize();
+
   const paginationInstanceId = `receivers-daily-${receiver_id}`;
-  const { getWindowedData, showPagination } =
-    usePaginationControls(paginationInstanceId);
+  const { getWindowedData, showPagination } = usePaginationControls(
+    paginationInstanceId,
+    {
+      windowSize: isDesktopSize ? undefined : 6,
+      navigationStep: isDesktopSize ? undefined : 6,
+    },
+  );
 
   const {
     data: dailyTotals,

@@ -1,10 +1,10 @@
 "use client";
 
 import ChartPagination from "@/components/chart-navigation";
-import { useMediaQuery } from "react-responsive";
 import ErrorMessage from "@/components/error-message";
 import { ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useWindowSize } from "@/hooks/use-window-size";
 import { formatCurrency } from "@/lib/format-currency";
 import { getMonthlyTotals } from "@/queries/monthly-totals";
 import { usePaginationControls } from "@/stores/pagination-store";
@@ -18,7 +18,7 @@ export default function MonthlyTotalChart() {
     queryFn: getMonthlyTotals,
   });
 
-  const isDesktopSize = useMediaQuery({ minWidth: 1024 });
+  const isDesktopSize = useWindowSize();
 
   const paginationInstanceId = "all-transactions";
   const paginationConfig = {
