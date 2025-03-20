@@ -10,13 +10,22 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import LoadTransactionsButton from "./load-transactions-button";
 import { Button } from "./ui/button";
 import UserProfile from "./user-profile";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export default function Header() {
   const { data: session, isPending } = authClient.useSession();
   const isLoggedIn = !!session;
+  const [open, setOpen] = useState(false);
 
   const navLinks = [
     { href: "/transactions", label: "Transactions" },
@@ -51,7 +60,7 @@ export default function Header() {
         ) : (
           isLoggedIn && (
             <>
-              {/* Mobile navigation */}
+              {/* Mobile navigation with Sheet */}
               <div className="flex items-center gap-4 lg:hidden">
                 <TooltipProvider>
                   <Tooltip>
@@ -64,9 +73,35 @@ export default function Header() {
                   </Tooltip>
                 </TooltipProvider>
 
-                <Button size="icon" aria-label="Menu">
-                  <Menu />
-                </Button>
+                <Sheet open={open} onOpenChange={setOpen}>
+                  <SheetTrigger asChild>
+                    <Button size="icon" aria-label="Menu">
+                      <Menu />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent className="w-64 border-neutral-800 bg-neutral-900">
+                    <SheetHeader>
+                      <SheetTitle className="text-left text-neutral-100">
+                        Menu
+                      </SheetTitle>
+                    </SheetHeader>
+                    <nav className="mt-8 flex flex-col space-y-6">
+                      {navLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="text-base text-neutral-300 transition-colors hover:text-neutral-100"
+                          onClick={() => setOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                      <div className="pt-4">
+                        <UserProfile />
+                      </div>
+                    </nav>
+                  </SheetContent>
+                </Sheet>
               </div>
 
               {/* Desktop navigation */}
