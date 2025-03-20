@@ -57,7 +57,7 @@ export default async function CurrentMonthExpenses() {
   ];
 
   return (
-    <Card className="flex flex-col gap-4 md:col-span-1">
+    <Card className="flex flex-col gap-4 lg:col-span-1">
       <CardHeader className="text-center">
         <CardTitle>Current month expenses</CardTitle>
       </CardHeader>
@@ -68,7 +68,7 @@ export default async function CurrentMonthExpenses() {
           currentMonthExpenses={currMonthExpenses}
         />
       </CardContent>
-      <CardFooter className="flex flex-col gap-2 py-3">
+      <CardFooter className="flex flex-col gap-2 py-8">
         <div
           className={cn(
             "font-bold",
