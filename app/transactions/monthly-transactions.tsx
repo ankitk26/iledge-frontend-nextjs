@@ -45,7 +45,7 @@ export default function MonthlyTransactions() {
   return (
     <section className="mt-16">
       <h1>{date} transactions</h1>
-      <div className="my-4 flex flex-col items-stretch gap-4">
+      <div className="my-8 flex flex-col items-stretch gap-4">
         {monthlyTransactionsList &&
           monthlyTransactionsList.map((transaction) => (
             <TransactionItem key={transaction.id} transaction={transaction} />

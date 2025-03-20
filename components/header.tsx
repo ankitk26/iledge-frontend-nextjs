@@ -25,7 +25,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="px-8 lg:px-24">
+    <header className="px-4 lg:px-24">
       <div className="flex items-center justify-between border-b border-b-neutral-800 py-4">
         <Link href="/">
           <h1 className="text-2xl font-bold">iLedge</h1>

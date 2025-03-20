@@ -43,7 +43,7 @@ export default function RootLayout({
             suppressHydrationWarning
           >
             <Header />
-            <main className="mt-10 px-8 lg:px-24">{children}</main>
+            <main className="mt-10 px-4 lg:px-24">{children}</main>
             <Toaster />
           </body>
         </ThemeProvider>

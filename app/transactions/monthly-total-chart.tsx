@@ -1,6 +1,7 @@
 "use client";
 
 import ChartPagination from "@/components/chart-navigation";
+import { useMediaQuery } from "react-responsive";
 import ErrorMessage from "@/components/error-message";
 import { ChartContainer } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,10 +18,12 @@ export default function MonthlyTotalChart() {
     queryFn: getMonthlyTotals,
   });
 
+  const isDesktopSize = useMediaQuery({ minWidth: 1024 });
+
   const paginationInstanceId = "all-transactions";
   const paginationConfig = {
-    windowSize: 12,
-    navigationStep: 12,
+    windowSize: isDesktopSize ? 12 : 6,
+    navigationStep: isDesktopSize ? 12 : 6,
   };
   const { getWindowedData, showPagination } = usePaginationControls(
     paginationInstanceId,
@@ -80,7 +83,7 @@ export default function MonthlyTotalChart() {
               offset={12}
               className="fill-neutral-500"
               fontSize={12}
-              formatter={formatCurrency}
+              formatter={isDesktopSize ? formatCurrency : undefined}
             />
           </Bar>
         </BarChart>
