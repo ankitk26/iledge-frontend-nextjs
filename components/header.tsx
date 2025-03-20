@@ -1,19 +1,5 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { authClient } from "@/lib/auth-client";
-import { Menu } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import LoadTransactionsButton from "./load-transactions-button";
-import { Button } from "./ui/button";
-import UserProfile from "./user-profile";
 import {
   Sheet,
   SheetContent,
@@ -21,11 +7,46 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "@/hooks/use-toast";
+import { authClient } from "@/lib/auth-client";
+import { Menu } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import LoadTransactionsButton from "./load-transactions-button";
+import { Button } from "./ui/button";
+import UserProfile from "./user-profile";
 
 export default function Header() {
   const { data: session, isPending } = authClient.useSession();
-  const isLoggedIn = !!session;
   const [open, setOpen] = useState(false);
+
+  const isEmailAuthorized = session?.user.email === "myselfankit51@gmail.com";
+
+  if (!isPending && session && !isEmailAuthorized) {
+    toast({
+      variant: "destructive",
+      title: "Invalid user",
+    });
+    authClient.signOut();
+    return (
+      <header className="px-4 lg:px-24">
+        <div className="flex items-center justify-between border-b border-b-neutral-800 py-4">
+          <Link href="/">
+            <h1 className="text-2xl font-bold">iLedge</h1>
+          </Link>
+        </div>
+      </header>
+    );
+  }
+
+  const isLoggedIn = !!session && isEmailAuthorized;
 
   const navLinks = [
     { href: "/transactions", label: "Transactions" },

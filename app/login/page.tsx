@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
-
 export default function LoginPage() {
   const { isPending } = authClient.useSession();
 

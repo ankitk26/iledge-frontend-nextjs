@@ -1,11 +1,30 @@
+import { betterFetch } from "@better-fetch/fetch";
+import { Session, User } from "better-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+import { auth } from "./lib/auth";
 
 export async function middleware(request: NextRequest) {
-  const sessionCookie = getSessionCookie(request);
-  if (!sessionCookie) {
+  const { data: session } = await betterFetch<{ session: Session; user: User }>(
+    "/api/auth/get-session",
+    {
+      baseURL: request.nextUrl.origin,
+      headers: {
+        cookie: request.headers.get("cookie") || "", // Forward the cookies from the request
+      },
+    },
+  );
+
+  if (!session) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  if (session.user.email !== "myselfankit51@gmail.com") {
+    await auth.api.revokeSessions({
+      headers: request.headers,
+    });
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
   return NextResponse.next();
 }
 
