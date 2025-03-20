@@ -75,19 +75,21 @@ export default function CategoryDialog({ receiver }: Props) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
           <CategoryIcon
             icon_name={receiver.category_icon}
-            className="stroke-neutral-400"
+            className="h-4 w-4 stroke-neutral-400 md:h-5 md:w-5"
           />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[80vh] w-full max-w-3xl">
+      <DialogContent className="max-h-[90vh] w-[calc(100%-2rem)] max-w-3xl overflow-hidden md:max-h-[80vh] md:w-full">
         <DialogHeader>
-          <DialogTitle>Update category</DialogTitle>
+          <DialogTitle className="text-lg md:text-xl">
+            Update category
+          </DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="mt-6 max-h-[50vh]">
+        <ScrollArea className="mt-4 max-h-[40vh] pr-4 md:mt-6 md:max-h-[50vh]">
           <CategoryDialogContent
             categories={categories}
             currentCategory={currentCategory}
@@ -96,8 +98,9 @@ export default function CategoryDialog({ receiver }: Props) {
             setCurrentCategory={setCurrentCategory}
           />
         </ScrollArea>
-        <DialogFooter className="mt-4 gap-3">
+        <DialogFooter className="mt-4 flex-col gap-2 sm:flex-row md:gap-3">
           <Button
+            className="order-2 w-full sm:order-1 sm:w-auto"
             disabled={
               mutationPending || currentCategory === receiver.category_id
             }
@@ -107,7 +110,11 @@ export default function CategoryDialog({ receiver }: Props) {
           >
             {mutationPending ? <Loader2 className="animate-spin" /> : "Save"}
           </Button>
-          <Button variant="secondary" onClick={() => setIsDialogOpen(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setIsDialogOpen(false)}
+            className="order-1 w-full sm:order-2 sm:w-auto"
+          >
             Close
           </Button>
         </DialogFooter>

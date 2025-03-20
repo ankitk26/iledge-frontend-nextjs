@@ -18,7 +18,7 @@ export default function AdminPage() {
 
   if (isPending) {
     return (
-      <div className="flex flex-col items-stretch gap-4">
+      <div className="flex flex-col items-stretch gap-3 px-2 md:gap-4 md:px-0">
         <Skeleton className="h-10 w-full" />
         <Skeleton className="h-10 w-full" />
         <Skeleton className="h-10 w-full" />
@@ -31,9 +31,9 @@ export default function AdminPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Manage receivers</h1>
-      <div className="mt-8 flex flex-col items-stretch gap-6">
+    <div className="px-2 md:px-0">
+      <h1 className="text-lg font-bold md:text-2xl">Manage receivers</h1>
+      <div className="mt-4 flex flex-col items-stretch gap-3 md:mt-8 md:gap-6">
         {receivers &&
           receivers.map((receiver) => (
             <ReceiverItem key={receiver.receiver_id} receiver={receiver} />
