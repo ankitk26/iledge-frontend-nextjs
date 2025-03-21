@@ -1,10 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import { authClient } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+
 export default function LoginPage() {
   const { isPending } = authClient.useSession();
+
+  const searchParams = useSearchParams();
+  const errorReason = searchParams.get("error");
+
+  if (!isPending && errorReason === "auth") {
+    toast({
+      variant: "destructive",
+      title: "Invalid user",
+    });
+  }
 
   return (
     <div className="flex flex-col items-center rounded-xl border border-neutral-800 py-12">

@@ -1,7 +1,6 @@
 import { betterFetch } from "@better-fetch/fetch";
 import { Session, User } from "better-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "./lib/auth";
 
 export async function middleware(request: NextRequest) {
   const { data: session } = await betterFetch<{ session: Session; user: User }>(
@@ -19,10 +18,14 @@ export async function middleware(request: NextRequest) {
   }
 
   if (session.user.email !== "myselfankit51@gmail.com") {
-    await auth.api.revokeSessions({
-      headers: request.headers,
+    await betterFetch("/api/auth/sign-out", {
+      method: "POST",
+      baseURL: request.nextUrl.origin,
+      headers: {
+        cookie: request.headers.get("cookie") || "",
+      },
     });
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/login?error=auth", request.url));
   }
 
   return NextResponse.next();

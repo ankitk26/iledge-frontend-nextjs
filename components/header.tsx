@@ -14,7 +14,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { toast } from "@/hooks/use-toast";
 import { authClient } from "@/lib/auth-client";
 import { Menu } from "lucide-react";
 import Link from "next/link";
@@ -28,24 +27,6 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   const isEmailAuthorized = session?.user.email === "myselfankit51@gmail.com";
-
-  if (!isPending && session && !isEmailAuthorized) {
-    toast({
-      variant: "destructive",
-      title: "Invalid user",
-    });
-    authClient.signOut();
-    return (
-      <header className="px-4 lg:px-24">
-        <div className="flex items-center justify-between border-b border-b-neutral-800 py-4">
-          <Link href="/">
-            <h1 className="text-2xl font-bold">iLedge</h1>
-          </Link>
-        </div>
-      </header>
-    );
-  }
-
   const isLoggedIn = !!session && isEmailAuthorized;
 
   const navLinks = [
